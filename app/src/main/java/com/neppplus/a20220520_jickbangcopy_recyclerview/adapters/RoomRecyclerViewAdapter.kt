@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.a20220520_jickbangcopy_recyclerview.R
 import com.neppplus.a20220520_jickbangcopy_recyclerview.models.RoomData
@@ -16,7 +17,7 @@ class RoomRecyclerViewAdapter(val mContext : Context, val mList : List<RoomData>
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
+        holder.bind(mList[position])
     }
 
     override fun getItemCount(): Int {
@@ -24,7 +25,17 @@ class RoomRecyclerViewAdapter(val mContext : Context, val mList : List<RoomData>
     }
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+        fun bind (item : RoomData) {
+            val priceTxt = itemView.findViewById<TextView>(R.id.PriceTxt)
+            val addressTxt = itemView.findViewById<TextView>(R.id.addressTxt)
+            val levelTxt = itemView.findViewById<TextView>(R.id.levelTxt)
+            val descriptionTxt = itemView.findViewById<TextView>(R.id.descriptionTxt)
 
+            priceTxt.text = item.getFormattedPrice()
+            addressTxt.text = "${item.address}, "
+            levelTxt.text = item.getFormattedLevel()
+            descriptionTxt.text = item.description
+        }
     }
 
 }
